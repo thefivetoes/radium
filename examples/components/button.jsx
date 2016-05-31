@@ -14,7 +14,20 @@
 var Radium = require('../../src');
 var React = require('react');
 
-@Radium
+const wrapButton = (Component) => {
+  class ButtonWrapper extends React.Component {
+    componentWillMount() {
+      console.log('Wrapped Button Will Mount');
+    }
+
+    render() {
+      return <Component {...this.props} {...this.state} />;
+    }
+  }
+  return ButtonWrapper;
+};
+
+
 class Button extends React.Component {
   render() {
     return (
@@ -84,4 +97,5 @@ var styles = {
   }
 };
 
-module.exports = Button;
+module.exports = Radium(wrapButton(Button));
+// module.exports = wrapButton(Radium(Button));
