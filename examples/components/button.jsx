@@ -14,6 +14,10 @@
 var Radium = require('../../src');
 var React = require('react');
 
+/**
+ * An example HOC used to wrap Button at the bottom of this file. Radium fails
+ * when this component is wrapped between Radium and Button.
+ */
 const wrapButton = (Component) => {
   class ButtonWrapper extends React.Component {
     componentWillMount() {
@@ -97,5 +101,8 @@ var styles = {
   }
 };
 
+//The following export does NOT work:
 module.exports = Radium(wrapButton(Button));
+
+//The export below DOES work:
 // module.exports = wrapButton(Radium(Button));
